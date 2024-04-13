@@ -95,3 +95,9 @@ variable "config_patch_files" {
   type        = list(string)
   default     = []
 }
+
+variable "s3_bucket_arn" {
+  description = "ARN of the S3 bucket used for VM import"
+  type        = string
+  default     = "arn:aws:s3:::talos-aws-example"
+}

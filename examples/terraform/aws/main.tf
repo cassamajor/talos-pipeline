@@ -405,3 +405,9 @@ data "talos_cluster_health" "this" {
   control_plane_nodes  = module.talos_control_plane_nodes.*.private_ip
   worker_nodes         = [for node in module.talos_worker_group : node.private_ip]
 }
+
+module "vmimport_role" {
+  source = "./vmimport-role-module"
+
+  s3_bucket_arn = var.s3_bucket_arn
+}
