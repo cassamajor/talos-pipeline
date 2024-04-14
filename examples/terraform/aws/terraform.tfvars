@@ -6,10 +6,10 @@ control_plane = {
 }
 extra_tags                  = {}
 kubernetes_api_allowed_cidr = "0.0.0.0/0"
-kubernetes_version          = ""
+kubernetes_version          = null
 s3_bucket_arn               = "arn:aws:s3:::talos-pipeline-images"
 talos_api_allowed_cidr      = "0.0.0.0/0"
-talos_version_contract      = ""
+talos_version_contract      = null
 vpc_cidr                    = "172.16.0.0/16"
 worker_groups = [
   {
