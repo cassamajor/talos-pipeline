@@ -13,5 +13,6 @@ worker_groups = [
   {
     name   = "default"
     ami_id = "ami-05c2712eb86ad8449"
+    num_instances = 3
   }
 ]

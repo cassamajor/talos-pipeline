@@ -51,7 +51,7 @@ data "aws_ami" "talos" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   name = var.cluster_name
   cidr = var.vpc_cidr
@@ -64,7 +64,7 @@ module "vpc" {
 
 module "cluster_sg" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   name        = var.cluster_name
   description = "Allow all intra-cluster and egress traffic"
@@ -97,7 +97,7 @@ module "cluster_sg" {
 
 module "kubernetes_api_sg" {
   source  = "terraform-aws-modules/security-group/aws//modules/https-443"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   name                = "${var.cluster_name}-k8s-api"
   description         = "Allow access to the Kubernetes API"
@@ -253,7 +253,7 @@ resource "aws_iam_policy" "worker_ccm_policy" {
 
 module "talos_control_plane_nodes" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   count = var.control_plane.num_instances
 
@@ -264,6 +264,8 @@ module "talos_control_plane_nodes" {
   subnet_id                   = element(module.vpc.public_subnets, count.index)
   iam_role_use_name_prefix    = false
   create_iam_instance_profile = var.ccm ? true : false
+  associate_public_ip_address = true
+
   iam_role_policies = var.ccm ? {
     "${var.cluster_name}-control-plane-ccm-policy" : aws_iam_policy.control_plane_ccm_policy[0].arn,
   } : {}
@@ -280,7 +282,7 @@ module "talos_control_plane_nodes" {
 
 module "talos_worker_group" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   for_each = merge([for info in var.worker_groups : { for index in range(0, info.num_instances) : "${info.name}.${index}" => info }]...)
 
@@ -291,6 +293,9 @@ module "talos_worker_group" {
   subnet_id                   = element(module.vpc.public_subnets, tonumber(trimprefix(each.key, "${each.value.name}.")))
   iam_role_use_name_prefix    = false
   create_iam_instance_profile = var.ccm ? true : false
+  associate_public_ip_address = true
+
+
   iam_role_policies = var.ccm ? {
     "${var.cluster_name}-worker-ccm-policy" : aws_iam_policy.worker_ccm_policy[0].arn,
   } : {}
@@ -310,3 +315,24 @@ module "vmimport_role" {
 
   s3_bucket_arn = var.s3_bucket_arn
 }
+
+#resource "aws_ebs_volume" "additional_volumes" {
+#  for_each = merge([for info in var.worker_groups : { for index in range(0, info.num_instances) : "${info.name}.${index}" => info }]...)
+#
+#  availability_zone = module.talos_worker_group[each.key].availability_zone
+#  size              = each.value.additional_volume_size
+#  type              = each.value.additional_volume_type
+#  encrypted         = each.value.encrypted
+#size              = 50
+#type              = "gp3" # Volume type
+#}
+#
+#resource "aws_volume_attachment" "ec2_attachment" {
+#  for_each = merge([for info in var.worker_groups : { for index in range(0, info.num_instances) : "${info.name}.${index}" => info }]...)
+#
+#  device_name = each.value.device_name
+#  instance_id = module.talos_worker_group[each.key].id
+#  volume_id   = aws_ebs_volume.additional_volumes[each.key].id
+#volume_id   = aws_ebs_volume.this.id
+#instance_id = module.talos_worker_group.id
+#}

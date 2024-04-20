@@ -1,9 +1,9 @@
 kind: Cluster
 name: talos-pipeline
 talos:
-  version: v1.6.7
+  version: v1.7.0
 kubernetes:
-  version: 1.29.3
+  version: 1.30.0
 features:
   enableWorkloadProxy: true
 patches:
@@ -21,6 +21,10 @@ patches:
     file: patches/argocd.yaml
   - name: monitoring
     file: patches/monitoring.yaml
+  - name: workloads
+    inline:
+      cluster:
+        allowSchedulingOnControlPlanes: true
 ---
 kind: Workers
 name: workers
