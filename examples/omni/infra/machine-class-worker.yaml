@@ -4,4 +4,4 @@ metadata:
   id: talos-pipeline-worker
 spec:
   matchlabels:
-    - omni.sidero.dev/connected
+    - omni.sidero.dev/connected, omni.sidero.dev/instance = c5.xlarge

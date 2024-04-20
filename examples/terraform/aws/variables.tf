@@ -32,9 +32,9 @@ variable "worker_groups" {
   description = "List of node worker node groups to create"
   type = list(object({
     name               = string
-    instance_type      = optional(string, "c5.large")
+    instance_type      = optional(string, "c5.xlarge")
     ami_id             = optional(string, null)
-    num_instances      = optional(number, 1)
+    num_instances      = optional(number, 3)
     config_patch_files = optional(list(string), [])
     tags               = optional(map(string), {})
   }))

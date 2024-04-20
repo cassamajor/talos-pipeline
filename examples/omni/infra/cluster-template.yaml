@@ -30,4 +30,4 @@ kind: Workers
 name: workers
 machineClass:
   name: talos-pipeline-worker
-  size: 3
+  size: unlimited
