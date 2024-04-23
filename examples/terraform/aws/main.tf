@@ -316,23 +316,18 @@ module "vmimport_role" {
   s3_bucket_arn = var.s3_bucket_arn
 }
 
-#resource "aws_ebs_volume" "additional_volumes" {
-#  for_each = merge([for info in var.worker_groups : { for index in range(0, info.num_instances) : "${info.name}.${index}" => info }]...)
-#
-#  availability_zone = module.talos_worker_group[each.key].availability_zone
-#  size              = each.value.additional_volume_size
-#  type              = each.value.additional_volume_type
-#  encrypted         = each.value.encrypted
-#size              = 50
-#type              = "gp3" # Volume type
-#}
-#
-#resource "aws_volume_attachment" "ec2_attachment" {
-#  for_each = merge([for info in var.worker_groups : { for index in range(0, info.num_instances) : "${info.name}.${index}" => info }]...)
-#
-#  device_name = each.value.device_name
-#  instance_id = module.talos_worker_group[each.key].id
-#  volume_id   = aws_ebs_volume.additional_volumes[each.key].id
-#volume_id   = aws_ebs_volume.this.id
-#instance_id = module.talos_worker_group.id
-#}
+resource "aws_ebs_volume" "this" {
+  for_each = merge([for info in var.worker_groups : { for index in range(0, info.num_instances) : "${info.name}.${index}" => info }]...)
+
+  availability_zone = module.talos_worker_group[each.key].availability_zone
+  size              = 200
+  type              = "gp3"
+}
+
+resource "aws_volume_attachment" "this" {
+  for_each = merge([for info in var.worker_groups : { for index in range(0, info.num_instances) : "${info.name}.${index}" => info }]...)
+
+  device_name = "/dev/sdp"
+  instance_id = module.talos_worker_group[each.key].id
+  volume_id   = aws_ebs_volume.this[each.key].id
+}
