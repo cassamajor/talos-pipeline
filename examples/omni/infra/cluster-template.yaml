@@ -1,5 +1,5 @@
 kind: Cluster
-name: talos-pipeline
+name: development-pipeline
 talos:
   version: v1.7.0
 kubernetes:

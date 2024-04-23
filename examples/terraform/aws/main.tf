@@ -320,7 +320,7 @@ resource "aws_ebs_volume" "this" {
   for_each = merge([for info in var.worker_groups : { for index in range(0, info.num_instances) : "${info.name}.${index}" => info }]...)
 
   availability_zone = module.talos_worker_group[each.key].availability_zone
-  size              = 200
+  size              = each.value.ebs_volume_size
   type              = "gp3"
 }
 
