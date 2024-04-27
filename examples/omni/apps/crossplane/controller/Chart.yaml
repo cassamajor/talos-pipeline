@@ -1,0 +1,17 @@
+apiVersion: v2
+name: crossplane
+description: Crossplane is an open source Kubernetes control plane that enables a high-productivity cloud operating model.
+type: application
+version: 1.15.2
+appVersion: 1.15.2
+home: https://crossplane.io
+sources:
+  - https://github.com/crossplane/crossplane
+maintainers:
+  - name: Crossplane Maintainers
+    email: info@crossplane.io
+dependencies:
+  - name: crossplane
+    version: 1.15.2
+    repository: https://charts.crossplane.io/stable
+    alias: crossplane
