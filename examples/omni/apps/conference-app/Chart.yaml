@@ -1,0 +1,11 @@
+apiVersion: v2
+name: conference-app
+description: A Helm chart for the Conference App
+type: application
+version: 1.0.0
+sources:
+  - https://github.com/cassamajor/platforms-on-k8s
+dependencies:
+  - name: conference-app
+    version: 1.0.0
+    repository: oci://ghcr.io/cassamajor/conference-app
