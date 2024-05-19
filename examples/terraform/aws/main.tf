@@ -331,3 +331,47 @@ resource "aws_volume_attachment" "this" {
   instance_id = module.talos_worker_group[each.key].id
   volume_id   = aws_ebs_volume.this[each.key].id
 }
+
+// [Network Load Balancer Complete Example](https://github.com/terraform-aws-modules/terraform-aws-alb/blob/master/examples/complete-nlb/main.tf)
+// [Create a Load Balancer for Talos Linux](https://www.talos.dev/v1.7/talos-guides/install/cloud-platforms/aws/#create-a-load-balancer)
+
+#module "nlb_k8s_nlb" {
+#  source  = "terraform-aws-modules/alb/aws"
+#  version = "~> 9.0"
+#
+#  name    = "${var.cluster_name}-k8s-api"
+#  enable_deletion_protection = false
+#
+#  load_balancer_type = "network"
+#  internal           = false
+#  vpc_id             = module.vpc.vpc_id
+#  subnets            = module.vpc.public_subnets
+#
+#  security_groups = [
+#    module.cluster_sg.security_group_id,
+#    module.kubernetes_api_sg.security_group_id,
+#  ]
+#
+#  target_groups = [
+#    {
+#      name_prefix      = "tg-"
+#      backend_protocol = "TCP"
+#      backend_port     = 6443
+#      target_type      = "ip"
+#      target_id = module.talos_control_plane_nodes.*.id
+#    }
+#  ]
+#
+#  listeners = [
+#    {
+#      port               = 443
+#      protocol           = "TCP"
+#      target_group_index = 0
+#      forward = {
+#        target_group_key = "ex-target-one"
+#      }
+#    }
+#  ]
+#
+#  tags    = merge(var.extra_tags, local.cluster_required_tags)
+#}
