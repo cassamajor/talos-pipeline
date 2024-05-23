@@ -1,7 +1,7 @@
 # Cluster Automation with Terraform
 1. Fork [cassamajor/talos-pipeline](https://github.com/siderolabs/contrib/tree/main)
 2. git clone your repository
-3. `cd` into `examples/terraform/aws`
+3. `cd` into `terraform`
 4. `terraform init`
 5. `terraform plan -out tf.plan -target module.vmimport_role`
 6. `terraform apply tf.plan`
@@ -25,28 +25,3 @@ omnictl apply -f machine-class-worker.yaml
     - `terraform plan -out tf.plan`
     - `terraform apply tf.plan`
 2. Read the [Cluster Example](https://omni.siderolabs.com/docs/tutorials/getting_started/#cluster-example) section to implement observability, monitoring, and application management.
-<!-- BEGIN_TF_DOCS -->
-## Requirements
-
-No requirements.
-
-## Providers
-
-No providers.
-
-## Modules
-
-No modules.
-
-## Resources
-
-No resources.
-
-## Inputs
-
-No inputs.
-
-## Outputs
-
-No outputs.
-<!-- END_TF_DOCS -->
