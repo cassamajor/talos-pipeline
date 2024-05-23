@@ -46,7 +46,7 @@
 | <a name="input_kubernetes_api_allowed_cidr"></a> [kubernetes_api_allowed_cidr](#input_kubernetes_api_allowed_cidr) | The CIDR from which to allow to access the Kubernetes API | `string` | `"0.0.0.0/0"` | no |
 | <a name="input_talos_api_allowed_cidr"></a> [talos_api_allowed_cidr](#input_talos_api_allowed_cidr) | The CIDR from which to allow to access the Talos API | `string` | `"0.0.0.0/0"` | no |
 | <a name="input_vpc_cidr"></a> [vpc_cidr](#input_vpc_cidr) | The IPv4 CIDR block for the VPC. | `string` | `"172.16.0.0/16"` | no |
-| <a name="input_worker_groups"></a> [worker_groups](#input_worker_groups) | List of node worker node groups to create | <pre>list(object({<br>    name               = string<br>    instance_type      = optional(string, "c5.large")<br>    ami_id             = optional(string, null)<br>    num_instances      = optional(number, 3)<br>    config_patch_files = optional(list(string), [])<br>    tags               = optional(map(string), {})<br>    ebs_volume_size   = optional(number, 200)<br>  }))</pre> | <pre>[<br>  {<br>    "name": "default"<br>  }<br>]</pre> | no |
+| <a name="input_worker_groups"></a> [worker_groups](#input_worker_groups) | List of node worker node groups to create | <pre>list(object({<br>    name               = string<br>    instance_type      = optional(string, "c5.large")<br>    ami_id             = optional(string, null)<br>    num_instances      = optional(number, 3)<br>    config_patch_files = optional(list(string), [])<br>    tags               = optional(map(string), {})<br>    ebs_volume_size    = optional(number, 200)<br>  }))</pre> | <pre>[<br>  {<br>    "name": "default"<br>  }<br>]</pre> | no |
 
 ## Outputs
 
