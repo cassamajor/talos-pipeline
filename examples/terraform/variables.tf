@@ -37,7 +37,7 @@ variable "worker_groups" {
     num_instances      = optional(number, 3)
     config_patch_files = optional(list(string), [])
     tags               = optional(map(string), {})
-    ebs_volume_size   = optional(number, 200)
+    ebs_volume_size    = optional(number, 200)
   }))
 
   validation {
@@ -89,4 +89,10 @@ variable "s3_bucket_arn" {
   description = "ARN of the S3 bucket used for VM import"
   type        = string
   default     = "arn:aws:s3:::talos-aws-example"
+}
+
+variable "role_name" {
+  description = "Name of the IAM role to create"
+  type        = string
+  default     = "vmimport"
 }

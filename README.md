@@ -25,3 +25,28 @@ omnictl apply -f machine-class-worker.yaml
     - `terraform plan -out tf.plan`
     - `terraform apply tf.plan`
 2. Read the [Cluster Example](https://omni.siderolabs.com/docs/tutorials/getting_started/#cluster-example) section to implement observability, monitoring, and application management.
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+No providers.
+
+## Modules
+
+No modules.
+
+## Resources
+
+No resources.
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

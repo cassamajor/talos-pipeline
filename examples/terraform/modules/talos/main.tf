@@ -310,12 +310,6 @@ module "talos_worker_group" {
   ]
 }
 
-module "vmimport_role" {
-  source = "./vmimport-role-module"
-
-  s3_bucket_arn = var.s3_bucket_arn
-}
-
 resource "aws_ebs_volume" "this" {
   for_each = merge([for info in var.worker_groups : { for index in range(0, info.num_instances) : "${info.name}.${index}" => info }]...)
 

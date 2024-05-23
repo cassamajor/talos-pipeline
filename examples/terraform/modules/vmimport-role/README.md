@@ -9,7 +9,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider_aws) | n/a |
 
 ## Modules
 
@@ -28,12 +28,12 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_role_name"></a> [role\_name](#input\_role\_name) | Name of the IAM role to create | `string` | `"vmimport"` | no |
-| <a name="input_s3_bucket_arn"></a> [s3\_bucket\_arn](#input\_s3\_bucket\_arn) | ARN of the S3 bucket used for VM import | `string` | n/a | yes |
+| <a name="input_role_name"></a> [role_name](#input_role_name) | Name of the IAM role to create | `string` | `"vmimport"` | no |
+| <a name="input_s3_bucket_arn"></a> [s3_bucket_arn](#input_s3_bucket_arn) | ARN of the S3 bucket used for VM import | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_vmimport_role_arn"></a> [vmimport\_role\_arn](#output\_vmimport\_role\_arn) | ARN of the vmimport IAM role |
+| <a name="output_vmimport_role_arn"></a> [vmimport_role_arn](#output_vmimport_role_arn) | ARN of the vmimport IAM role |
 <!-- END_TF_DOCS -->
