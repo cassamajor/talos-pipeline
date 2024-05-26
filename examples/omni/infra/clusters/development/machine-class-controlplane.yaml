@@ -1,7 +1,7 @@
 metadata:
   namespace: default
   type: MachineClasses.omni.sidero.dev
-  id: pipeline-manager-controlplanes
+  id: development-pipeline-controlplanes
 spec:
   matchlabels:
     - omni.sidero.dev/connected, omni.sidero.dev/instance = c5.large

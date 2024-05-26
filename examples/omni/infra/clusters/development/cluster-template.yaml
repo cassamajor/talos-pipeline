@@ -1,5 +1,5 @@
 kind: Cluster
-name: pipeline-manager
+name: development-pipeline
 talos:
   version: v1.7.0
 kubernetes:
@@ -12,15 +12,15 @@ patches:
 ---
 kind: ControlPlane
 machineClass:
-  name: pipeline-manager-controlplanes
+  name: development-pipeline-controlplanes
   size: 3
 patches:
   - name: cilium
-    file: ../../patches/cilium.yaml
+    file: patches/cilium.yaml
   - name: argocd
-    file: ../../patches/argocd.yaml
+    file: patches/argocd.yaml
   - name: monitoring
-    file: ../../patches/monitoring.yaml
+    file: patches/monitoring.yaml
   - name: workloads
     inline:
       cluster:
@@ -29,5 +29,5 @@ patches:
 kind: Workers
 name: workers
 machineClass:
-  name: pipeline-manager-workers
+  name: development-pipeline-workers
   size: unlimited
