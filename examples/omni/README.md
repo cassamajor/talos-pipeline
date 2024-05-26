@@ -25,7 +25,7 @@ See the [How-to](https://omni.siderolabs.com/docs/how-to-guides/how-to-install-a
 Once the required machines are registered to Omni and machine classes have been configured, simply run
 
 ```bash
-omnictl cluster template sync --file cluster-template.yaml
+omnictl cluster template sync --file clusters/pipeline-manager/cluster-template.yaml -d
 ```
 
 Omni will then being to allocate your machines, install Talos, and configure and bootstrap the cluster.

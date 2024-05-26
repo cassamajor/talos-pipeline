@@ -16,11 +16,11 @@ machineClass:
   size: 3
 patches:
   - name: cilium
-    file: ../../patches/cilium.yaml
+    file: patches/cilium.yaml
   - name: argocd
-    file: ../../patches/argocd.yaml
+    file: patches/argocd.yaml
   - name: monitoring
-    file: ../../patches/monitoring.yaml
+    file: patches/monitoring.yaml
   - name: workloads
     inline:
       cluster:

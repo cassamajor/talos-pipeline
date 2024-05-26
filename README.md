@@ -3,7 +3,7 @@
 2. git clone your repository
 3. `cd` into `terraform`
 4. `terraform init`
-5. `terraform plan -out tf.plan -target module.vmimport_role`
+5. `terraform plan -out tf.plan -target module.vmimport_role -var-file=tfvars/manager.tfvars`
 6. `terraform apply tf.plan`
 
 # Prepare the Omni Image
