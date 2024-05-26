@@ -1,5 +1,7 @@
-# Cluster Automation with Terraform
-1. Fork [cassamajor/talos-pipeline](https://github.com/siderolabs/contrib/tree/main)
+> Based on https://github.com/siderolabs/contrib/tree/main
+
+# Cluster Provisioning
+1. Fork [cassamajor/talos-pipeline](https://github.com/cassamajor/talos-pipeline/tree/main)
 2. git clone your repository
 3. `cd` into `terraform`
 4. `terraform init`
