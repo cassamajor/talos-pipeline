@@ -8,14 +8,16 @@ spec:
         generators:
           - list:
               elements:
-                - repoURL: https://github.com/cassamajor/talos-pipeline.git
-                  revision: HEAD
-                  repoPath: examples/omni/apps/*/*
+                - repoURL:
+                  revision:
+                  repoPath:
           - git:
-              repoURL: '{{ repoURL }}'
-              revision: '{{ revision }}'
+              repoURL: https://github.com/cassamajor/talos-pipeline.git
+              revision: HEAD
               directories:
-                - path: '{{ repoPath }}'
+                - path: argo/cluster/management/*/*
+                - path: argo/cluster/common/*/*
+                - path: argo/environment/common/*/*
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
