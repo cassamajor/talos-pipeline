@@ -43,7 +43,7 @@ Applications can be made of Helm charts, Kustomize definitions, or just Kubernet
 ## Extending
 
 1. Commit the contents from the `omni` directory to a new repository
-2. Configure ArgoCD to use that repository [bootstrap-app-set.yaml](cluster/common/argocd/argocd/bootstrap-app-set.yaml)
-3. Regenerate the ArgoCD bootstrap cluster manifest patch [argocd.yaml](infra/patches/argocd.yaml) (instructions can be found at the top of that file).
+2. Configure ArgoCD to use that repository [bootstrap-app-set.yaml](../examples/omni/cluster/common/argocd/argocd/bootstrap-app-set.yaml)
+3. Regenerate the ArgoCD bootstrap cluster manifest patch [argocd.yaml](../../infra/patches/argocd.yaml) (instructions can be found at the top of that file).
 4. Commit and push these changes to a hosted git repository the Omni instance has access to.
 5. Create a cluster with Omni as described above. 
