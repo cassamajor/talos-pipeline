@@ -1,0 +1,19 @@
+apiVersion: v2
+name: radius
+description: Radius provides a declarative way to manage your infrastructure and applications.
+type: application
+version: 0.35.0
+appVersion: 0.35.0
+home: https://radapp.io
+sources:
+  - https://github.com/radius-project/radius
+maintainers:
+  - name: Radius Authors
+    url: https://github.com/radius-project/radius/tree/main/deploy/Chart
+dependencies:
+  - name: radius
+    version: 0.35.0
+    repository: https://radius.azurecr.io/helm/v1/repo
+    alias: radius
+
+
