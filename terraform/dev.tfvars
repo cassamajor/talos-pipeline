@@ -1,9 +1,7 @@
 ccm                = false
 cluster_name       = "talos-pipeline"
 config_patch_files = []
-control_plane = {
-  ami_id = "ami-05c2712eb86ad8449"
-}
+control_plane = {}
 extra_tags                  = {}
 kubernetes_api_allowed_cidr = "0.0.0.0/0"
 s3_bucket_arn               = "arn:aws:s3:::talos-pipeline-images"

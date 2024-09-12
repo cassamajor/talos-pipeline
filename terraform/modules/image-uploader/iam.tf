@@ -23,8 +23,8 @@ data "aws_iam_policy_document" "vmimport_role_policy" {
       "s3:ListBucket",
     ]
     resources = [
-      var.s3_bucket_arn,
-      "${var.s3_bucket_arn}/*",
+      aws_s3_bucket.this.arn,
+      "${aws_s3_bucket.this.arn}/*",
     ]
   }
   statement {
@@ -45,7 +45,7 @@ resource "aws_iam_role" "vmimport" {
 }
 
 resource "aws_iam_role_policy" "vmimport" {
-  name   = "vmimport"
+  name   = "${var.role_name}-policy"
   role   = aws_iam_role.vmimport.name
   policy = data.aws_iam_policy_document.vmimport_role_policy.json
 }
