@@ -2,6 +2,7 @@ ccm                = false
 cluster_name       = "talos-pipeline"
 config_patch_files = []
 control_plane = {}
+path_to_image = "/Users/cassamajor/Downloads/aws-amd64-omni-naxis-v1.7.4.raw"
 extra_tags                  = {}
 kubernetes_api_allowed_cidr = "0.0.0.0/0"
 s3_bucket_arn               = "arn:aws:s3:::talos-pipeline-images"

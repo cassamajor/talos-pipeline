@@ -1,9 +1,9 @@
 kind: Cluster
 name: development-pipeline
 talos:
-  version: v1.7.0
+  version: v1.7.4
 kubernetes:
-  version: 1.30.0
+  version: 1.30.4
 features:
   enableWorkloadProxy: true
 patches:

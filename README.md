@@ -1,27 +1,32 @@
-# Cluster Automation with Terraform
-1. Fork [cassamajor/talos-pipeline](https://github.com/siderolabs/contrib/tree/main)
+# Download and Extract the Omni Image
+1. Sign up for [Omni](https://signup.siderolabs.io/)
+2. Login to your instance
+3. Select "Download Installation Media"
+4. Keep the defaults (`AWS AMI (amd64)` and the latest version of Talos), and click "Download".
+5. Extract the downloaded file: `xz -d path_to_omni_image > disk.raw`
+
+# Create EC2 Instances
+1. Fork [cassamajor/talos-pipeline](https://github.com/cassamajor/talos-pipeline)
 2. git clone your repository
 3. `cd` into `terraform`
 4. `terraform init`
-5. `terraform plan -out tf.plan -target module.vmimport_role`
+5. `terraform plan -out tf.plan`
 6. `terraform apply tf.plan`
 
-# Prepare the Omni Image
-1. Read the [Download Installation Media](https://omni.siderolabs.com/docs/tutorials/getting_started/#download-installation-media) section to download your Omni image.
-2. Read the [Create your own AMIs](https://www.talos.dev/v1.6/talos-guides/install/cloud-platforms/aws/#create-your-own-amis) section to make your Omni image available to EC2 instances.
-    - Skip the "Create the `vmimport` Role" section.
-    - For the "Create the Image Snapshot" section, do not run the curl command. Run `xz -d OMNI_IMAGE > disk.raw`, where `OMNI_IMAGE` is the path to the Omni Image downloaded in Step 1. `
-    - "Register the Image" is the last section. Do not "Create a Security Group".
-
-# Create Machine Classes
-```shell
-cd examples/omni/infra/
-omnictl apply -f machine-class-controlplane.yaml
-omnictl apply -f machine-class-worker.yaml
-```
-
 # Create a Kubernetes Cluster
-1. In your terminal, run
-    - `terraform plan -out tf.plan`
-    - `terraform apply tf.plan`
-2. Read the [Cluster Example](https://omni.siderolabs.com/docs/tutorials/getting_started/#cluster-example) section to implement observability, monitoring, and application management.
+1. Update the ArgoCD ApplicationSet template: change "your-repo-name" in the text below to the name of your repository.
+   ```shell
+   sed -i 's|https://github.com/siderolabs/contrib.git|your-repo-name|' apps/argocd/argocd/bootstrap-app-set.yaml
+   kustomize build apps/argocd/argocd | yq -i 'with(.cluster.inlineManifests.[] | select(.name=="argocd"); .contents=load_str("/dev/stdin"))' infra/patches/argocd.yaml
+   ```
+2. Commit the changes and push to your repository.
+3. Create Machine Classes
+   ```shell
+   cd omni/infra/
+   omnictl apply -f machine-class-controlplane.yaml
+   omnictl apply -f machine-class-worker.yaml
+   ```
+4. Create the cluster using the cluster template
+   ```shell
+   omnictl cluster template sync --file cluster-template.yaml
+   ```

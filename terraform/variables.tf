@@ -96,3 +96,8 @@ variable "role_name" {
   type        = string
   default     = "vmimport"
 }
+
+variable "path_to_image" {
+  description = "Path to the extracted Omni image"
+  type        = string
+}
