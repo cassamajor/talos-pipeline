@@ -1,15 +1,6 @@
-resource "aws_s3_bucket" "this" {
-  bucket = var.bucket_name
-}
-
-resource "aws_s3_bucket_acl" "this" {
-  bucket = aws_s3_bucket.this.id
-  acl    = "private"
-}
-
 # Upload the image to S3
 resource "aws_s3_object" "object" {
-  bucket      = aws_s3_bucket.this.id
+  bucket      = var.bucket_id
   key         = basename(var.path_to_image)
   source      = var.path_to_image
   source_hash = filemd5(var.path_to_image)
@@ -20,12 +11,12 @@ resource "aws_ebs_snapshot_import" "this" {
   disk_container {
     format = "RAW"
     user_bucket {
-      s3_bucket = aws_s3_bucket.this.id
+      s3_bucket = var.bucket_id
       s3_key    = aws_s3_object.object.id
     }
   }
 
-  role_name = aws_iam_role.vmimport.name
+  role_name = var.role_name
 }
 
 # Register the image

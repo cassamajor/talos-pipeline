@@ -1,11 +1,18 @@
 locals {
-  ami_id = module.image_uploader.ami_id
+  ami_id = { ami_id = module.image_uploader.ami_id }
+}
+
+module "image_import_role" {
+  source = "./modules/image-import-role"
 }
 
 module "image_uploader" {
   source = "./modules/image-uploader"
+  count = var.path_to_image ? 1 : 0
 
+  bucket_id     = module.image_import_role.bucket_id
   path_to_image = var.path_to_image
+  role_name = var.role_name
 }
 
 module "talos" {
