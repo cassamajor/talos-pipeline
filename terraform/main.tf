@@ -1,5 +1,5 @@
 locals {
-  ami_id = { ami_id = module.image_uploader.ami_id}
+  ami_id = { ami_id = module.image_uploader.ami_id }
 }
 
 module "image_uploader" {
