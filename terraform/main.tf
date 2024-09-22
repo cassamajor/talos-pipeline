@@ -19,5 +19,5 @@ module "talos" {
   talos_api_allowed_cidr      = var.talos_api_allowed_cidr
   vpc_cidr                    = var.vpc_cidr
   worker_groups               = var.worker_groups
-  control_plane               = merge(local.ami_id, var.control_plane)
+  control_plane               = var.control_plane
 }
