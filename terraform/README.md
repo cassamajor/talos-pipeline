@@ -2,7 +2,7 @@
 ```
 terraform fmt -recursive
 terraform-docs tfvars hcl .
-terraform-docs markdown --escape=false --output-file=README.md .
+terraform-docs markdown --escape=false --output-file=README.md --recursive
 ```
 
 <!-- BEGIN_TF_DOCS -->
