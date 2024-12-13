@@ -3,7 +3,7 @@
 2. Login to your instance
 3. Select "Download Installation Media"
 4. Keep the defaults (`AWS AMI (amd64)` and the latest version of Talos), and click "Download".
-5. Extract the downloaded file: `xz -d path_to_omni_image > aws-amd64-talos-v1.7.6.raw`
+5. Extract the downloaded file: `xz -d path_to_omni_image > aws-amd64-talos-v1.8.4.raw`
 
 # Provision a Kubernetes Cluster
 ## Fork and Clone the Repository
@@ -22,10 +22,12 @@
 
 ## Provision EC2 Instances
 From the root of the repository, run:
-1. `cd terraform`
-2. `terraform init`
-3. `terraform plan -out tf.plan`
-4. `terraform apply tf.plan`
+```shell
+cd terraform
+terraform init
+terraform plan -out tf.plan
+terraform apply tf.plan
+```
 
 ## Cluster Automation
 1. [Install and Configure omnictl](https://omni.siderolabs.com/how-to-guides/install-and-configure-omnictl)
