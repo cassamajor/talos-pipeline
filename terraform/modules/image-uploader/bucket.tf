@@ -1,3 +1,7 @@
+# locals {
+#   aws_s3_object = "${aws_s3_bucket.this.id}/${basename(var.path_to_image)}"
+# }
+
 resource "aws_s3_bucket" "this" {
   bucket = var.bucket_name
 }
@@ -7,13 +11,31 @@ resource "aws_s3_bucket_acl" "this" {
   acl    = "private"
 }
 
+#resource "aws_s3_bucket_ownership_controls" "this" {
+#  bucket = aws_s3_bucket.this.id
+#
+#  rule {
+#    object_ownership = "BucketOwnerPreferred"
+#  }
+#}
+
 # Upload the image to S3
-resource "aws_s3_object" "object" {
+resource "aws_s3_object" "this" {
   bucket      = aws_s3_bucket.this.id
   key         = basename(var.path_to_image)
   source      = var.path_to_image
   source_hash = filemd5(var.path_to_image)
 }
+
+# resource "null_resource" "upload_large_file" {
+#   provisioner "local-exec" {
+#     command = "aws s3 cp ${var.path_to_image} s3://${locals.aws_s3_object} --checksum"
+#   }
+#   triggers = {
+#     # This will force the upload every time the file changes
+#     file_checksum = filemd5(var.path_to_image)
+#   }
+# }
 
 # Import the image from S3
 resource "aws_ebs_snapshot_import" "this" {
@@ -21,7 +43,7 @@ resource "aws_ebs_snapshot_import" "this" {
     format = "RAW"
     user_bucket {
       s3_bucket = aws_s3_bucket.this.id
-      s3_key    = aws_s3_object.object.id
+      s3_key    = aws_s3_object.this.id
     }
   }
 
@@ -30,7 +52,7 @@ resource "aws_ebs_snapshot_import" "this" {
 
 # Register the image
 resource "aws_ami" "this" {
-  name                = aws_s3_object.object.id
+  name                = aws_s3_object.this.id
   virtualization_type = "hvm"
   root_device_name    = "/dev/xvda"
   imds_support        = "v2.0"

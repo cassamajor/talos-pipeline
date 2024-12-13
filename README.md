@@ -3,7 +3,7 @@
 2. Login to your instance
 3. Select "Download Installation Media"
 4. Keep the defaults (`AWS AMI (amd64)` and the latest version of Talos), and click "Download".
-5. Extract the downloaded file: `xz -d path_to_omni_image > disk.raw`
+5. Extract the downloaded file: `xz -d path_to_omni_image > aws-amd64-talos-v1.7.6.raw`
 
 # Provision a Kubernetes Cluster
 ## Fork and Clone the Repository
@@ -43,5 +43,5 @@ From the root of the repository, run:
 ## Cluster Teardown
 When you're ready to tear down the cluster, run the following to keep your custom Omni image and S3 bucket:
    ```shell
-   terraform plan -out plan.tf -target module.talos -destroy
+   terraform plan -out tf.plan -target module.talos -destroy
    ```
