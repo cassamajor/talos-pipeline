@@ -1,5 +1,19 @@
 cilium:
   kubeProxyReplacement: true
+  bpf.masquerade: true
+  kubeProxyReplacement: true
+  gatewayAPI.enabled: true
+  gatewayAPI.enableAlpn: true
+  gatewayAPI.enableAppProtocol: true
+  envoy.enabled: true
+  debug.enabled: true
+  debug.verbose: flow
+  enableIPv4Masquerade: true
+  enableIPv6Masquerade: true
+  cgroup.autoMount.enabled: false
+  cgroup.hostRoot: /sys/fs/cgroup
+  k8sServiceHost: localhost
+  k8sServicePort: 7445
   ipam:
     mode: kubernetes
   securityContext:
