@@ -45,5 +45,6 @@ terraform apply tf.plan
 ## Cluster Teardown
 When you're ready to tear down the cluster, run the following to keep your custom Omni image and S3 bucket:
    ```shell
+   omnictl cluster template delete --file cluster-template.yaml
    terraform plan -out tf.plan -target module.talos -destroy
    ```

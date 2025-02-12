@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: unknown
-        image: ghcr.io/cassamajor/ebpf-ip-counter:v3
+        image: ghcr.io/cassamajor/ebpf-ip-counter:v1
         imagePullPolicy: Always
         securityContext:
           privileged: true
