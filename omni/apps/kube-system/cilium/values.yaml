@@ -11,8 +11,6 @@ cilium:
   debug.verbose: flow
   enableIPv4Masquerade: true
   enableIPv6Masquerade: true
-  cgroup.autoMount.enabled: false
-  cgroup.hostRoot: /sys/fs/cgroup
   ipam:
     mode: kubernetes
   securityContext:
