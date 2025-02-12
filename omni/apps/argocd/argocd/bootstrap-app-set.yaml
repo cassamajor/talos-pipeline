@@ -9,7 +9,7 @@ spec:
           - list:
               elements:
                 - repoURL: https://github.com/cassamajor/talos-pipeline.git
-                  revision: xcnf
+                  revision: metal
                   repoPath: omni/apps/*/*
           - git:
               repoURL: '{{ repoURL }}'

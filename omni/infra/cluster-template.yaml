@@ -1,9 +1,9 @@
 kind: Cluster
-name: development-pipeline
+name: talos-router-gateway
 talos:
-  version: v1.7.4
+  version: v1.9.2
 kubernetes:
-  version: 1.30.4
+  version: 1.31.4
 features:
   enableWorkloadProxy: true
 patches:
@@ -11,9 +11,8 @@ patches:
     file: patches/cni.yaml
 ---
 kind: ControlPlane
-machineClass:
-  name: talos-pipeline-controlplane
-  size: 3
+machines:
+  - 30303031-3030-3030-3131-663636336130
 patches:
   - name: cilium
     file: patches/cilium.yaml
@@ -26,8 +25,37 @@ patches:
       cluster:
         allowSchedulingOnControlPlanes: true
 ---
-kind: Workers
-name: workers
-machineClass:
-  name: talos-pipeline-worker
-  size: unlimited
+kind: Machine
+name: 30303031-3030-3030-3131-663636336130
+patches:
+  - idOverride: 400-cm-30303031-3030-3030-3131-663636336130
+    inline:
+      cluster:
+        allowSchedulingOnControlPlanes: true
+        extraManifests:
+          - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
+          - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+        network:
+          dnsDomain: failure.domains
+      machine:
+        install:
+          disk: /dev/mmcblk0
+        kubelet:
+          extraArgs:
+            rotate-server-certificates: true
+        network:
+          hostname: kaar
+          interfaces:
+            - addresses:
+                - 10.42.0.73/24
+              dhcp: true
+              interface: eth0
+              routes:
+                - gateway: 10.42.0.1
+                  network: 0.0.0.0/0
+          nameservers:
+            - 10.42.0.1
+            - 1.1.1.1
+        sysctls:
+          net.ipv4.ip_forward: "1"
+          net.ipv6.conf.all.forwarding: "1"
