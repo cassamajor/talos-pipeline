@@ -1,16 +1,5 @@
 cilium:
   kubeProxyReplacement: true
-  bpf.masquerade: true
-  kubeProxyReplacement: true
-  gatewayAPI.enabled: true
-  gatewayAPI.enableAlpn: true
-  gatewayAPI.enableAppProtocol: true
-  gatewayAPI.hostNetwork.enabled: true
-  envoy.enabled: true
-  debug.enabled: true
-  debug.verbose: flow
-  enableIPv4Masquerade: true
-  enableIPv6Masquerade: true
   ipam:
     mode: kubernetes
   securityContext:
