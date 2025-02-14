@@ -27,13 +27,51 @@ From the root of the repository, run:
 3. `terraform plan -out tf.plan`
 4. `terraform apply tf.plan`
 
+## Provision Bare Metal Nodes
+```
+brew install helm
+helm repo add cilium https://helm.cilium.io/
+helm repo update
+cd /omni/apps/kube-system/cilium
+
+cd ../../../infra/patches
+helm template cilium ../../apps/kube-system/cilium --namespace kube-system | yq -i 'with(.cluster.inlineManifests.[] | select(.name=="cilium"); .contents=load_str("/dev/stdin"))' cilium.yaml
+```
+
+Add the following values to `/omni/apps/kube-system/cilium/values.yaml`:
+```
+forwardKubeDNSToHost=true
+bpf.masquerade: true
+kubeProxyReplacement: true
+gatewayAPI.enabled: true
+gatewayAPI.enableAlpn: true
+gatewayAPI.enableAppProtocol: true
+gatewayAPI.hostNetwork.enabled: true
+envoy.enabled: true
+debug.enabled: true
+debug.verbose: flow
+enableIPv4Masquerade: true
+enableIPv6Masquerade: true
+```
+
+1. [Install and Configure omnictl](https://omni.siderolabs.com/how-to-guides/install-and-configure-omnictl)
+2. Create Machine Classes
+   ```
+   omnictl apply -f machine-classes/metal-controlplane.yaml
+3. Create the Cluster
+   ```shell
+   omnictl cluster template sync --file cluster-template.yaml
+   ```
+
+   ```
+
 ## Cluster Automation
 1. [Install and Configure omnictl](https://omni.siderolabs.com/how-to-guides/install-and-configure-omnictl)
 2. Create Machine Classes
    ```shell
    cd omni/infra/
-   omnictl apply -f machine-class-controlplane.yaml
-   omnictl apply -f machine-class-worker.yaml
+   omnictl apply -f machine-classes/aws-controlplane.yaml
+   omnictl apply -f machine-classes/aws-worker.yaml
    ```
 3. Create the Cluster
    ```shell

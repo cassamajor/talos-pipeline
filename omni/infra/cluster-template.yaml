@@ -1,5 +1,5 @@
 kind: Cluster
-name: talos-router-gateway
+name: router-gateway
 talos:
   version: v1.9.2
 kubernetes:
@@ -35,6 +35,13 @@ patches:
         extraManifests:
           - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
           - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+          - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/standard/gateway.networking.k8s.io_gatewayclasses.yaml
+          - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/standard/gateway.networking.k8s.io_gateways.yaml
+          - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/standard/gateway.networking.k8s.io_httproutes.yaml
+          - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/standard/gateway.networking.k8s.io_referencegrants.yaml
+          - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/standard/gateway.networking.k8s.io_grpcroutes.yaml
+          - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/experimental/gateway.networking.k8s.io_tlsroutes.yaml
+
         network:
           dnsDomain: failure.domains
       machine:
@@ -47,8 +54,8 @@ patches:
           hostname: kaar
           interfaces:
             - addresses:
-                - 10.42.0.73/24
-              dhcp: true
+                - 10.42.0.58/24
+              dhcp: false
               interface: eth0
               routes:
                 - gateway: 10.42.0.1
