@@ -63,7 +63,14 @@ enableIPv6Masquerade: true
    omnictl cluster template sync --file cluster-template.yaml
    ```
 
-   ```
+Download config files for new cluster:
+```
+omnictl kubeconfig -c router-gateway
+omnictl talosconfig -c router-gateway
+```
+
+
+
 
 ## Cluster Automation
 1. [Install and Configure omnictl](https://omni.siderolabs.com/how-to-guides/install-and-configure-omnictl)

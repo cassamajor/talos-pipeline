@@ -1,5 +1,9 @@
 cilium:
   kubeProxyReplacement: true
+  gatewayAPI.enabled: true
+  gatewayAPI.enableAlpn: true
+  gatewayAPI.enableAppProtocol: true
+  gatewayAPI.hostNetwork.enabled: true
   ipam:
     mode: kubernetes
   securityContext:
