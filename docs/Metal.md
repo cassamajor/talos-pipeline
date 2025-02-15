@@ -29,6 +29,7 @@ gatewayAPI.enabled: true
 gatewayAPI.enableAlpn: true
 gatewayAPI.enableAppProtocol: true
 gatewayAPI.hostNetwork.enabled: true
+ingressController.hostNetwork.enabled=true
 envoy.enabled: true
 debug.enabled: true
 debug.verbose: flow
