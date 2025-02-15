@@ -5,6 +5,7 @@ cilium:
   gatewayAPI.enableAppProtocol: true
   gatewayAPI.hostNetwork.enabled: true
   ingressController.hostNetwork.enabled: true
+  ingressController.externalTrafficPolicy: null
   ipam:
     mode: kubernetes
   securityContext:
