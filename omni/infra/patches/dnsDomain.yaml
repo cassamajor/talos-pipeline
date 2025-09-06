@@ -1,3 +1,4 @@
 cluster:
+  clusterName: iota.failure.domains
   network:
-    dnsDomain: failure.domains
+    dnsDomain: local.iota.failure.domains

@@ -1,11 +1,12 @@
 cilium:
   kubeProxyReplacement: true
-  gatewayAPI.enabled: true
-  gatewayAPI.enableAlpn: true
-  gatewayAPI.enableAppProtocol: true
-  gatewayAPI.hostNetwork.enabled: true
-  ingressController.hostNetwork.enabled: true
-  ingressController.externalTrafficPolicy: null
+  gatewayAPI:
+    enabled: true
+    enableAlpn: true
+    enableAppProtocol: true
+    hostNetwork:
+      enabled: true
+    externalTrafficPolicy: null
   ipam:
     mode: kubernetes
   securityContext:
@@ -33,6 +34,8 @@ cilium:
   # Enable Cilium Ingress Controller
   ingressController:
     enabled: true
+    hostNetwork:
+      enabled: true
   # Use KubePrism to access cluster API
   k8sServiceHost: localhost
   k8sServicePort: 7445
@@ -47,3 +50,7 @@ cilium:
           # Enable Omni Workload Proxying for this service
           omni-kube-service-exposer.sidero.dev/port: "50080"
           omni-kube-service-exposer.sidero.dev/label: Hubble
+    peerService:
+      clusterDomain: local.iota.failure.domains
+  etcd:
+    clusterDomain: local.iota.failure.domains
